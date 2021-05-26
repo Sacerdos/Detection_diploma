@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonAnalyze;
     Bitmap imageForAnalysing;
     Uri uriImageForAnalysing;
-
+    TextView pneumonia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         ImagePickerActivity.clearCache(this);
         imageViewForChoosing = findViewById(R.id.imageView);
         buttonAnalyze = findViewById(R.id.buttonAnalyze);
+        pneumonia = findViewById(R.id.textView);
         imageViewForChoosing.setOnClickListener(view -> Dexter.withActivity(MainActivity.this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     // You can update this bitmap to your server
                     imageForAnalysing = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageViewForChoosing.setImageBitmap(imageForAnalysing);
+                    pneumonia.setText(getString(R.string.pneumonia_line));
                     buttonAnalyze.setClickable(true);
                     uriImageForAnalysing = uri;
                     System.out.println(uri);
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             /*Toast toast = Toast.makeText(MainActivity.this, response.body().string(),Toast.LENGTH_LONG);
                             toast.show();*/
-                            TextView pneumonia = findViewById(R.id.textView);
+
                             pneumonia.setText(getString(R.string.pneumonia_line) + " " + response.body().string() + "%");
                             buttonAnalyze.setEnabled(true);
                         } catch (IOException e) {
