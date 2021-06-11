@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     imageForAnalysing = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageViewForChoosing.setImageBitmap(imageForAnalysing);
                     pneumonia.setText(getString(R.string.pneumonia_line));
-                    buttonAnalyze.setClickable(true);
+                    buttonAnalyze.setEnabled(true);
                     uriImageForAnalysing = uri;
                     System.out.println(uri);
                     // loading profile image from local cache
